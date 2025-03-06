@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:SystemOceniania.ViewModel"
+             x:Class="MVVM.View.MainPage">
+
+    <ContentPage.BindingContext>
+        <vm:MainViewModel />
+    </ContentPage.BindingContext>
+    <ScrollView>
+        <VerticalStackLayout>
+            <CollectionView ItemsSource="{Binding students}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Label>
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span FontSize="32" Text="{Binding Name, StringFormat='{0}'}" />
+                                    <Span FontSize="32" Text="{Binding Surname, StringFormat=' {0}'}" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:MainViewModel}}, Path=StudentSelectedCmd}" CommandParameter="{Binding}" />
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
